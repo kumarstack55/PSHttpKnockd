@@ -1,0 +1,12 @@
+{
+  "WebServiceName": "Http Knockd Web Service",
+  "WatchServiceName": "Http Knockd Watcher Service",
+  "MutexNameToRewriteKnockedJson": "Global\\HttpKnockedMutex",
+  "EventLogLogName": "Application",
+  "EventLogSource": "HttpKnockedSource",
+  "FirewallRuleName": "Http Knocked Rule (TCP-in)",
+  "FirewallRuleTcpPortNumber": 10022,
+  "KnockServicePortNumber": 10080,
+  "WatchTimeInterval": 10,
+  "TimeToDisableRule": 7200
+}
