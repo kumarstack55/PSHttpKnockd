@@ -56,7 +56,7 @@ service2 -->|"Enable for a certain period from the last knock."| rule2
 PowerShell を管理者権限で実行して、設定を編集し、インストール用のコマンドを実行してください。
 
 ```powershell
-git clone https://...
+git clone https://github.com/kumarstack55/PSHttpKnockd.git
 
 Set-Location .\PSHttpKnockd
 
