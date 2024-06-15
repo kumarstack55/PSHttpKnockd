@@ -436,7 +436,7 @@ function Invoke-WebServiceMain {
             $Response.Close()
 
             # 要求が指定条件であれば、ファイルに時刻を記録する。
-            if ($RequestHash["knock"] -eq "y") {
+            if ($QueryStringHash["knock"] -eq "y") {
                 # "http://.../path/to?knock=y" にアクセスがあったら、ファイルに時刻を記録する。
                 $Now = Get-Date
                 $Knock = [Knock]::new($Now)
