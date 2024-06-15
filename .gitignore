@@ -1,2 +1,3 @@
 *.lnk
 configurations.json
+data/*.json
