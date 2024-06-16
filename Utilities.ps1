@@ -486,11 +486,9 @@ function Invoke-WatchAndEnableRuleMain {
         $Knock = $KnockReader.Read()
         $LastAccessTime = $Knock.LastAccessTime
 
-        if ($PreviousLastAccessTime -ne $LastAccessTime) {
-            Invoke-EnsureThatFirewallRuleIsDesiredState `
-                    -TimeToDisableRule $Configuration.TimeToDisableRule `
-                    -FirewallRuleName $Configuration.FirewallRuleName
-        }
+        Invoke-EnsureThatFirewallRuleIsDesiredState `
+                -TimeToDisableRule $Configuration.TimeToDisableRule `
+                -FirewallRuleName $Configuration.FirewallRuleName
         $PreviousLastAccessTime = $LastAccessTime
 
         Start-Sleep $Configuration.WatchTimeInterval
