@@ -300,6 +300,8 @@ function Invoke-EnsureThatFirewallRuleStatus {
     }
 }
 
+$script:LastEnabledOrDisabled = $null
+
 function Invoke-EnsureThatFirewallRuleIsDesiredState {
     param(
         [Parameter(Mandatory)][int]$TimeToDisableRule,
@@ -309,14 +311,19 @@ function Invoke-EnsureThatFirewallRuleIsDesiredState {
     $ShouldBeEnabled = Test-FirewallRuleShouldBeEnabled -LastAccessTime $LastAccessTime -TimeToDisableRule $TimeToDisableRule
 
     $EnabledOrDisabled = if ($ShouldBeEnabled) { "enabled" } else { "disabled" }
-    $Message = 'Ensure that firewall rule "{0}" is {1}.' -f $FirewallRuleName, $EnabledOrDisabled
-    $global:EventLogger.WriteEventInformation(1, $Message)
+
+    if ($script:LastEnabledOrDisabled -ne $EnabledOrDisabled) {
+        $Message = 'Ensure that firewall rule "{0}" is {1}.' -f $FirewallRuleName, $EnabledOrDisabled
+        $global:EventLogger.WriteEventInformation(1, $Message)
+    }
 
     if ($ShouldBeEnabled) {
         Invoke-EnsureThatFirewallRuleStatus -FirewallRuleDisplayName $FirewallRuleName -Enabled
     } else {
         Invoke-EnsureThatFirewallRuleStatus -FirewallRuleDisplayName $FirewallRuleName -Disabled
     }
+
+    $script:LastEnabledOrDisabled = $EnabledOrDisabled
 }
 
 function Invoke-InstallMain {
